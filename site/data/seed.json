@@ -1,0 +1,14 @@
+[
+  { "lang": "ko", "brief": {
+    "brand": "가상 브랜드 모리", "contact": "가상 담당자", "email": "demo@example.com",
+    "category": "hairbody", "concept": "두피 쿨링, 약산성 샴푸. 자연 유래 성분 컨셉",
+    "countries": ["KR"], "channel": "국내 온라인몰", "qty": "", "month": "", "container": "펌프형 500mL" } },
+  { "lang": "en", "brief": {
+    "brand": "Virtual Brand Halo", "contact": "Demo Buyer", "email": "buyer@example.com",
+    "category": "sun", "concept": "Lightweight sun stick, non-sticky, portable for outdoor sports",
+    "countries": ["US"], "channel": "U.S. online marketplace", "qty": "5000", "month": "2027-06", "container": "twist-up stick 20g" } },
+  { "lang": "ko", "brief": {
+    "brand": "가상 브랜드 유키", "contact": "가상 담당자", "email": "demo2@example.com",
+    "category": "makeup", "concept": "자연스러운 톤업 크림, 일본 드럭스토어용",
+    "countries": ["JP"], "channel": "일본 드럭스토어", "qty": "3000", "month": "2027-04", "container": "튜브 50mL" } }
+]

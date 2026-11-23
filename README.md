@@ -8,7 +8,7 @@
 
 ## 실행
 
-- 시연: (공개 후 링크)
+- 시연: https://githubleejungah.github.io/oem-brief-desk/ (영업 화면 바로 가기: `#sales=B-0002`)
 - 로컬: `python -m http.server -d site 8080` → http://localhost:8080
 - 시험: `node --test tests/` · 채점: `node eval/run.mjs`
 

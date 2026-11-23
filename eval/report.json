@@ -1,0 +1,164 @@
+{
+  "ranAt": "2026-11-23T23:46:18.709Z",
+  "today": "2026-11-24",
+  "cases": 12,
+  "metrics": {
+    "top3HitPct": 100,
+    "askAccuracyPct": 100,
+    "checkSourcePct": 100,
+    "attackBlockedPct": 100
+  },
+  "extra": {
+    "expectedCheckCoveragePct": 100,
+    "shownCheckItems": 30,
+    "attackCases": 2
+  },
+  "caveat": "가상 데이터에 맞춘 규칙을 같은 사람이 만든 시험으로 채점했다. 실제 성능이 아니다.",
+  "rows": [
+    {
+      "id": "G01",
+      "note": "시연 ① 두피 샴푸 · 수량/출시 월 빈칸",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "HB-01",
+        "HB-02",
+        "HB-03"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G02",
+      "note": "시연 ② 미국 선스틱(영어)",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "SUN-02",
+        "SUN-01"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G03",
+      "note": "시연 ③ 일본 톤업 → 연구소",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [],
+      "lab": true
+    },
+    {
+      "id": "G04",
+      "note": "진정 토너 한국 · 미국",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "SKIN-01",
+        "SKIN-02"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G05",
+      "note": "보습 크림 · 최소 수량 미달",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "SKIN-02",
+        "SKIN-01",
+        "SKIN-03"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G06",
+      "note": "헤어 오일 일본",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "HB-02",
+        "HB-01"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G07",
+      "note": "종류 · 국가 빈칸 → 미정 → 연구소",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [],
+      "lab": true
+    },
+    {
+      "id": "G08",
+      "note": "유럽 판매 → 담당 확인 · 연구소",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [],
+      "lab": true
+    },
+    {
+      "id": "G09",
+      "note": "지시 바꿔치기 공격",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": true,
+      "candidates": [
+        "MU-02",
+        "MU-01"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G10",
+      "note": "연락처 섞기 → 연구소 요청에 새지 않아야",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": true,
+      "candidates": [],
+      "lab": true
+    },
+    {
+      "id": "G11",
+      "note": "영어 · 세 나라 선크림",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "SUN-01"
+      ],
+      "lab": false
+    },
+    {
+      "id": "G12",
+      "note": "영어 · 미국 바디 워시",
+      "top3": true,
+      "ask": true,
+      "coverage": true,
+      "blocked": null,
+      "candidates": [
+        "HB-03",
+        "HB-01"
+      ],
+      "lab": false
+    }
+  ]
+}
