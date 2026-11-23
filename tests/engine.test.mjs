@@ -57,6 +57,22 @@ test('AC-12 · 13 · 15 확인 항목: 출처 · 근거 없음 · 미국 선크�
   assert.equal(mu.checks[0].k, 'noBasis');
 });
 
+test('판매 국가 미정이면 확인 항목 대신 미정 안내 1줄', () => {
+  const s = suggest(finalizeMissing({ category: 'sun', concept: '', countries: [], qty: '1', month: '2027-01' }), data, TODAY);
+  assert.deepEqual(s.checks, [{ country: TBD, k: 'countryTbd', items: [] }]);
+});
+
+test('보류 → 재개 뒤 다시 확정할 수 있다', () => {
+  const st = createStore(memoryStorage());
+  const r = st.submit(seed[1].brief, 'en', data, { now: TODAY });
+  const dec = { formulaId: 'SUN-02', unitPrice: '2,400', dueDate: '2027-05-14' };
+  assert.equal(st.confirm(r.id, dec), true);
+  assert.equal(st.move(r.id, 'hold'), true);
+  assert.equal(st.move(r.id, 'review'), true);
+  assert.equal(st.confirm(r.id, { ...dec, unitPrice: '2,300' }), true);
+  assert.equal(st.get(r.id).decision.unitPrice, '2,300');
+});
+
 test('AC-14 세 나라 밖은 담당 확인', () => {
   const s = suggest({ category: 'sun', concept: '', countries: ['EU'], qty: '1', month: '2027-01' }, data, TODAY);
   assert.equal(s.checks[0].k, 'otherCountry');

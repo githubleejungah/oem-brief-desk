@@ -16,7 +16,7 @@ export const T = {
     doneTitle: '상담이 접수됐어요', doneLead: '영업 담당자가 확인한 뒤 제안서를 드려요.',
     myList: '내 상담', viewProposal: '제안서 보기', waiting: '영업 확인 중',
     propTitle: '제품 제안서(초안)', propAi: 'AI 제안 — 참고용', propSales: '영업 확정', print: '인쇄', close: '닫기',
-    formula: '처방', unitPrice: '단가', dueDate: '납기', ship: '예상 출고', checksTitle: '나라별 확인할 항목',
+    formula: '처방', unitPrice: '단가(원)', dueDate: '납기', ship: '예상 출고', checksTitle: '나라별 확인할 항목',
     checksNote: 'AI 판단이 아니라 확인할 목록입니다.', labTitle: '연구소 신규 개발 요청', lab: '연구소 신규 개발',
     virtual: '가상', tbd: '미정 — 영업 확인 필요',
   },
@@ -36,7 +36,7 @@ export const T = {
     doneTitle: 'Inquiry received', doneLead: 'Our sales team will review it and send you a proposal.',
     myList: 'My inquiries', viewProposal: 'View proposal', waiting: 'Under review',
     propTitle: 'Product proposal (draft)', propAi: 'AI suggestion — for reference', propSales: 'Confirmed by sales', print: 'Print', close: 'Close',
-    formula: 'Formula', unitPrice: 'Unit price', dueDate: 'Delivery date', ship: 'Estimated shipping', checksTitle: 'Items to check by market',
+    formula: 'Formula', unitPrice: 'Unit price (KRW)', dueDate: 'Delivery date', ship: 'Estimated shipping', checksTitle: 'Items to check by market',
     checksNote: 'A checklist to verify, not an AI judgment.', labTitle: 'New development request to R&D', lab: 'New development by R&D',
     virtual: 'Virtual', tbd: 'TBD — sales will confirm',
   },
@@ -48,7 +48,10 @@ export function reasonText(r, lang) {
   const ko = lang !== 'en';
   switch (r.k) {
     case 'cat': return ko ? '제품 종류 일치' : 'Product type matches';
-    case 'country': return ko ? `판매 국가 지원: ${r.v}` : `Supports markets: ${r.v}`;
+    case 'country': {
+      const names = String(r.v).split(', ').map((c) => T[ko ? 'ko' : 'en'].ctry[c] || c).join(', ');
+      return ko ? `판매 국가 지원: ${names}` : `Supports markets: ${names}`;
+    }
     case 'tags': return ko ? `효능 · 컨셉 낱말 겹침: ${r.v.map((x) => x.ko).join(', ')}` : `Matching keywords: ${r.v.map((x) => x.en).join(', ')}`;
     case 'noTags': return ko ? '효능 · 컨셉 낱말 겹침 없음' : 'No matching keywords';
     case 'qtyTbd': return ko ? '수량 미정 — 영업 확인' : 'Quantity TBD — sales will confirm';
@@ -60,6 +63,7 @@ export function reasonText(r, lang) {
 
 export function checkGroupText(g, lang) {
   const ko = lang !== 'en';
+  if (g.k === 'countryTbd') return ko ? '판매 국가 미정 — 영업 확인 뒤 확인 항목을 정함' : 'Target market TBD — items will follow once confirmed';
   if (g.k === 'otherCountry') return ko ? '해외 영업 · 인허가 담당 확인 필요' : 'To be checked by our export / regulatory team';
   if (g.k === 'noBasis') return ko ? '이 제품 종류 전용 항목: 근거 없음 — 인허가 담당 확인' : 'No product-specific item on file — regulatory team will check';
   return '';

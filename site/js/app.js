@@ -203,7 +203,7 @@ function candidateList(r, locked) {
 function checksBlock(r, lang) {
   const L = T[lang];
   return h('div', { class: 'checksbox' }, h('h4', { text: L.checksTitle }), h('p', { class: 'note', text: L.checksNote }),
-    r.suggestion.checks.map((g) => h('div', { class: 'cgroup' }, h('strong', { text: L.ctry[g.country] || g.country }),
+    r.suggestion.checks.map((g) => h('div', { class: 'cgroup' }, h('strong', { text: g.country === TBD ? (lang === 'en' ? 'Market' : '판매 국가') : L.ctry[g.country] || g.country }),
       h('ul', {}, g.items.map((id) => {
         const c = data.checks.find((x) => x.id === id);
         return h('li', {}, lang === 'en' ? c.text_en : c.text_ko, ' ', h('a', { href: c.source.url, target: '_blank', rel: 'noopener', text: `[${c.source.name}]` }));
@@ -216,8 +216,10 @@ function salesDetail() {
   const b = r.brief;
   const hold = r.stage === 'hold';
   const locked = r.stage !== 'review';
-  const d = (ui.dec[r.id] ||= { formulaId: '', unitPrice: '', dueDate: '', memo: '' });
-  const view = r.decision || d;
+  // 보류 → 재개로 검토에 돌아오면 지난 확정값을 고칠 초안으로 가져온다
+  const d = (ui.dec[r.id] ||= r.decision ? { ...r.decision } : { formulaId: '', unitPrice: '', dueDate: '', memo: '' });
+  const view = locked && r.decision ? r.decision : d;
+  const isLab = view.formulaId === 'LAB';
   const rows = [['brand', b.brand], ['contact', b.contact], ['email', b.email], ['category', T.ko.cat[b.category] || b.category],
     ['countries', b.countries], ['channel', b.channel], ['qty', b.qty], ['month', b.month], ['container', b.container], ['concept', b.concept]];
   const stageBtns = [];
@@ -239,10 +241,10 @@ function salesDetail() {
       hold ? h('p', { class: 'alert', text: '보류 중에는 확정할 수 없어요. 재개하면 검토로 돌아가요.' }) : null,
       h('div', { class: 'grid' },
         h('label', { class: 'field' }, h('span', { class: 'lab', text: '처방(위에서 고르기)' }), h('input', { value: view.formulaId ? fname(view.formulaId, 'ko') : '', readonly: true })),
-        h('label', { class: 'field' }, h('span', { class: 'lab', text: '단가(원/개)' }),
-          h('input', { value: view.unitPrice || '', disabled: locked, oninput: (e) => { d.unitPrice = e.target.value; syncConfirm(); } })),
-        h('label', { class: 'field' }, h('span', { class: 'lab', text: '납기' }),
-          h('input', { type: 'date', value: view.dueDate || '', disabled: locked, onchange: (e) => { d.dueDate = e.target.value; render(); } })),
+        h('label', { class: 'field' }, h('span', { class: 'lab', text: isLab ? '단가(개발 뒤 산정이면 그렇게 적기)' : '단가(원/개)' }),
+          h('input', { value: view.unitPrice || '', placeholder: isLab ? '예: 개발 후 산정' : '', disabled: locked, oninput: (e) => { d.unitPrice = e.target.value; syncConfirm(); } })),
+        h('label', { class: 'field' }, h('span', { class: 'lab', text: isLab ? '회신 예정일' : '납기' }),
+          h('input', { type: 'date', value: view.dueDate || '', disabled: locked, oninput: (e) => { d.dueDate = e.target.value; syncConfirm(); }, onchange: (e) => { d.dueDate = e.target.value; syncConfirm(); } })),
         h('label', { class: 'field' }, h('span', { class: 'lab', text: '메모' }),
           h('input', { value: view.memo || '', disabled: locked, oninput: (e) => { d.memo = e.target.value; } }))),
       h('div', { class: 'row' },
@@ -251,7 +253,14 @@ function salesDetail() {
         stageBtns),
       !locked ? null : h('p', { class: 'muted', text: r.decision ? '확정됨. 단계만 바꿀 수 있어요.' : '' })),
     h('details', {}, h('summary', { text: `기록 ${r.history.length}줄` }),
-      h('ol', { class: 'hist' }, r.history.map((x) => h('li', { text: `${x.at.slice(0, 16).replace('T', ' ')}  ${x.from ? STAGE_KO[x.from] : '—'} → ${STAGE_KO[x.to]}` })))));
+      h('ol', { class: 'hist' }, r.history.map((x) => h('li', { text: `${localTime(x.at)}  ${x.from ? STAGE_KO[x.from] : '—'} → ${STAGE_KO[x.to]}` })))));
+}
+
+// 기록 시각은 보는 사람 컴퓨터 시각(한국이면 한국 시각)으로
+function localTime(iso) {
+  const d = new Date(iso);
+  const p = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }
 
 function syncConfirm() {

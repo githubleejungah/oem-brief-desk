@@ -103,6 +103,7 @@ export function pickFormulas(brief, formulas, today) {
 
 // AC-12~16: 나라별 확인 항목
 export function pickChecks(brief, checks) {
+  if (brief.countries === TBD) return [{ country: TBD, k: 'countryTbd', items: [] }];
   const countries = Array.isArray(brief.countries) ? brief.countries : [];
   const out = [];
   for (const c of countries) {

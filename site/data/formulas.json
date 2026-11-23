@@ -3,7 +3,7 @@
     "tags": [["수분", "촉촉", "hydrat", "moist"], ["백탁", "white cast"], ["데일리", "daily"]],
     "countries": ["KR", "US", "JP"], "moq": 5000, "weeks": [12, 16] },
   { "id": "SUN-02", "category": "sun", "name_ko": "가상 선스틱 B", "name_en": "Virtual Sun Stick B", "form": "stick",
-    "tags": [["스틱", "stick"], ["휴대", "portable", "on-the-go"], ["끈적임", "가벼운", "lightweight", "non-sticky"]],
+    "tags": [["스틱", "stick"], ["휴대", "portable", "on-the-go"], ["가벼운", "끈적임", "lightweight", "non-sticky"]],
     "countries": ["KR", "US"], "moq": 3000, "weeks": [10, 14] },
   { "id": "SUN-03", "category": "sun", "name_ko": "가상 선스프레이 C", "name_en": "Virtual Sun Spray C", "form": "spray",
     "tags": [["스프레이", "뿌리는", "spray"], ["덧바름", "reapply"]],
