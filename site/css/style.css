@@ -119,3 +119,10 @@ summary { cursor: pointer; font-weight: 600; color: var(--navy); }
   .modal { position: static; background: none; padding: 0; }
   .paper { border: 0; padding: 0; }
 }
+
+/* 샘플 · 확정 단가 */
+.samplebox { background: var(--g100); border-radius: 8px; padding: 10px 12px; margin-top: 10px; }
+.samplebox h4 { margin: 0 0 4px; font-size: 14px; color: var(--forest); }
+.samplebox p { margin: 4px 0; font-size: 13px; }
+.feebox { background: var(--warn-t); border: 1px solid #f0cfb0; border-radius: 8px; padding: 10px 12px; margin: 10px 0; }
+.feebox p { margin: 4px 0; font-size: 14px; }

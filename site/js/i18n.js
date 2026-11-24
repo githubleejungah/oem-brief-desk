@@ -19,6 +19,12 @@ export const T = {
     formula: '처방', unitPrice: '단가(원)', dueDate: '납기', ship: '예상 출고', checksTitle: '나라별 확인할 항목',
     checksNote: 'AI 판단이 아니라 확인할 목록입니다.', labTitle: '연구소 신규 개발 요청', lab: '연구소 신규 개발',
     virtual: '가상', tbd: '미정 — 영업 확인 필요',
+    estPrice: '예상 단가(가견적, 원)', estNote: '샘플 확정 뒤 정식 견적을 드려요.', estDue: '예상 납기', replyBy: '회신 예정일',
+    samples: '샘플 조건', freeN: (n) => `무상 ${n}회`, sampleNote: '샘플비 안내', finalPrice: '확정 단가(원)',
+    sampleReq: '샘플 요청', sampleCount: (u, f) => `지금까지 ${u}회 요청 · 무상 ${f}회`,
+    samplePending: '샘플 요청 처리 중 — 영업 담당자가 확인해요',
+    feeTitle: '유상 샘플 안내', feeLead: (f) => `이번 요청은 무상 ${f}회를 넘어 샘플비가 들 수 있어요.`,
+    feeAskSales: '샘플비는 영업 담당자가 따로 안내해요.', agree: '동의하고 요청', cancel: '취소',
   },
   en: {
     title: 'New Brand Inquiry Desk',
@@ -39,6 +45,12 @@ export const T = {
     formula: 'Formula', unitPrice: 'Unit price (KRW)', dueDate: 'Delivery date', ship: 'Estimated shipping', checksTitle: 'Items to check by market',
     checksNote: 'A checklist to verify, not an AI judgment.', labTitle: 'New development request to R&D', lab: 'New development by R&D',
     virtual: 'Virtual', tbd: 'TBD — sales will confirm',
+    estPrice: 'Estimated unit price (KRW)', estNote: 'A formal quote follows once the sample is approved.', estDue: 'Estimated delivery', replyBy: 'Reply by',
+    samples: 'Sample terms', freeN: (n) => `${n} free round${n === 1 ? '' : 's'}`, sampleNote: 'Sample fee note', finalPrice: 'Confirmed unit price (KRW)',
+    sampleReq: 'Request a sample', sampleCount: (u, f) => `${u} requested so far · ${f} free`,
+    samplePending: 'Sample request in progress — our sales team will follow up',
+    feeTitle: 'Paid sample notice', feeLead: (f) => `This request goes beyond the ${f} free round${f === 1 ? '' : 's'} and may be charged.`,
+    feeAskSales: 'Our sales team will confirm the sample fee.', agree: 'Agree and request', cancel: 'Cancel',
   },
 };
 

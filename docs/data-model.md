@@ -1,6 +1,6 @@
 # 데이터 설계
 
-> 상태: 초안(승인 대기) · 2026-11-24 · 근거: [requirements.md](requirements.md)
+> 상태: 승인(2026-11-24) · 같은 날 Q13~15 반영 · 근거: [requirements.md](requirements.md)
 
 ## 1. 정본 표
 
@@ -51,9 +51,12 @@
 | brief | 입력 칸 10개(브랜드명 · 담당자 이름 · 연락 메일 · 제품 종류 · 효능과 컨셉 · 판매 국가[] · 판매 채널 · 첫 주문 수량 · 출시 희망 월 · 용기 희망). 빈 필수 칸은 `"TBD"`(미정) |
 | askedOnce | 되묻기를 했는지(true면 더 묻지 않음) |
 | suggestion | 엔진 결과: candidates[≤3]{id, reasons[], flags[]}, labRequest(없으면 null), checks[], notes[] |
-| decision | 영업 확정값: formulaId 또는 `LAB`, unitPrice, dueDate, memo, confirmedAt. 엔진은 이 칸을 쓰지 않음 |
+| decision | 영업 확정값: formulaId 또는 `LAB`, estPrice(예상 단가 · 가견적, 글), estDue(예상 납기), freeSamples(무상 샘플 횟수, 0 이상 정수), sampleNote(샘플비 안내, 선택), memo, confirmedAt. 엔진은 이 칸을 쓰지 않음 |
+| finalPrice | 확정 단가(글). 샘플 확정 뒤 영업이 넣음. 비어 있으면 수주로 못 감 |
+| opened | 영업이 처음 연 때 true(문의 → 검토) |
+| samples[] | { n(몇 번째), at, paid(무상 횟수 초과 · 동의함), status(pending · done), doneAt }. pending 은 최대 1건 |
 | stage | inquiry 문의 · review 검토 · proposal 제안 · sample 샘플 · won 수주 · hold 보류 |
-| history[] | { at, from, to } 단계 바꿀 때 1줄 |
+| history[] | { at, from, to } 단계 바꿀 때 1줄, 또는 { at, note } 샘플 요청 · 처리 1줄 |
 
 ### 2-4. 골든셋 (`golden.json`, 1건)
 
